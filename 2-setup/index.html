@@ -13,9 +13,36 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <script type="text/babel">
-    const Title = <h2 className="title"> Learn React from Coders.Tokyo </h2>
-    const Content = React.createElement('p', null, 'This is my test for lesson 3.');
-    const App = React.createElement('div', null, Title, Content);
+    const myStyle = {
+      border: '1px solid black'
+    };
+    const Day = (
+      <tr className="day" style={myStyle}>
+        <td style={myStyle}>Monday</td>
+        <td style={myStyle}>Tuesday</td>
+        <td style={myStyle}>Wednesday</td>
+        <td style={myStyle}>Thusday</td>
+        <td style={myStyle}>Friday</td>
+        <td style={myStyle}>Saturday</td>
+      </tr>
+    );
+    const Subject = (
+      <tr className="subject" style={myStyle}>
+        <th style={myStyle}>Nihongo</th>
+        <th style={myStyle}>Yasumi but React</th>
+        <th style={myStyle}>Nihongo</th>
+        <th style={myStyle}>IT Nihongo</th>
+        <th style={myStyle}>OOP</th>
+        <th style={myStyle}>Yasumi but React</th>
+      </tr>
+    );
+    const Table = React.createElement('table', {
+      style: {
+        borderCollapse: "collapse",
+        border: "1px solid black"
+      }
+    }, Day, Subject);
+    const App = React.createElement('div', null, Table);
     const root = document.getElementById('root');
     ReactDOM.render(App, root);
   </script>
