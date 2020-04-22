@@ -12,9 +12,13 @@
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   
   <script>
-    const Hello = React.createElement('div', null, 'Hello World!');
+    const Title = React.createElement('h2', {
+      className: 'title'
+    }, 'Learn React from Coders.Tokyo');
+    const Content = React.createElement('p', null, 'This is my test for lesson 3.');
+    const App = React.createElement('div', null, Title, Content);
     const root = document.getElementById('root');
-    ReactDOM.render(Hello, root);
+    ReactDOM.render(App, root);
   </script>
 </body>
 </html>
