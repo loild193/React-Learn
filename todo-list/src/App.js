@@ -11,9 +11,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
+        <TodoItem title="Go to bed"/>
+        <TodoItem title="Play game"/>
+        <TodoItem title="Chat with gf"/>
         <a
           className="App-link"
           href="https://reactjs.org"
