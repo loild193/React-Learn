@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Title from './components/Title';
 import Form from './components/Form';
 import Footer from './components/Footer';
+import SubMenu from './components/SubMenu';
 
 
 function App() {
@@ -12,6 +13,11 @@ function App() {
       <Title />
       <Form />
       <Footer />
+      <SubMenu icon="home" name="HOME"/>
+      <SubMenu icon="deal" name="DEALS"/>
+      <SubMenu icon="upload" name="UPLOAD"/>
+      <SubMenu icon="work" name="WORK"/>
+      <SubMenu icon="setting" name="SETTINGS"/>
     </div>
   );
 }
