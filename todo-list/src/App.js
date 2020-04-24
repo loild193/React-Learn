@@ -12,11 +12,10 @@ class App extends Component {
       { title: 'Play game', isDone: true },
       { title: 'Chat with gf'}
     ];
-    this.records = [
-      { company:  "Alfreds_Futterkiste", contact: "Maria_Anders", country: "Germany" },
-      { company:  "Centro_comercial_Moctezuma", contact: "Francisco_Chang", country: "Mexico" },
-      { company:  "Ernst_Handel", contact: "Roland_Mendel", country: "Austria" },
-      { company:  "Island_Trading", contact: "Helen_Bennett", country: "UK" }
+    this.images = [
+      { src: "http://bit.ly/3ayPusa", alt: "Image 1", width: 200, isClick: true },
+      { src: "http://bit.ly/3ayPusa", alt: "Image 1", width: 200 },
+      { src: "http://bit.ly/3ayPusa", alt: "Image 1", width: 200 }
     ];
   };
   render() {
@@ -28,19 +27,18 @@ class App extends Component {
         <table>
           <tbody>
             <tr>
-              <th>Company</th>
-              <th>Contact</th>
-              <th>Country</th>
+              <th>Image column 1</th>
+              <th>Image column 2</th>
+              <th>Image column 3</th>
             </tr>
-          </tbody>      
-          {
-            this.records.map( (record, index) => <Table 
-            key={index} 
-            company={record.company} 
-            contact={record.contact} 
-            country={record.country}
-            />)
-          }            
+          </tbody>
+          <tbody> 
+            <tr>     
+              {
+                this.images.map( (image, index) => <Table key={index} image={image} />)
+              }
+            </tr>
+          </tbody>              
         </table>      
       </div>
     );
