@@ -8,9 +8,9 @@ class App extends Component {
   constructor() {
     super();
     this.todoItems = [
-      'Go to bed',
-      'Play game',
-      'Chat with gf'
+      { title: 'Go to bed', isDone: true },
+      { title: 'Play game', isDone: true },
+      { title: 'Chat with gf'}
     ];
     this.records = [
       { company:  "Alfreds_Futterkiste", contact: "Maria_Anders", country: "Germany" },
@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         {
-          this.todoItems.map( (item, index) => <TodoItem key={index} title={item}/> )
+          this.todoItems.map( (item, index) => <TodoItem key={index} item={item}/> )
         }
         <table>
           <tbody>
