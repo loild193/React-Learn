@@ -26,20 +26,21 @@ class App extends Component {
           this.todoItems.map( (item, index) => <TodoItem key={index} title={item}/> )
         }
         <table>
-        <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Company</th>
+              <th>Contact</th>
+              <th>Country</th>
+            </tr>
+          </tbody>      
           {
-          this.records.map( 
-            (record, index) => <Table 
+            this.records.map( (record, index) => <Table 
             key={index} 
             company={record.company} 
             contact={record.contact} 
-            country={record.country} /> 
-          )
-        }
+            country={record.country}
+            />)
+          }            
         </table>      
       </div>
     );
