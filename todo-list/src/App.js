@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
-import Table from './components/Table';
+import OrderList from './components/OrderList';
 
 
 class App extends Component {
@@ -12,10 +12,12 @@ class App extends Component {
       { title: 'Play game', isDone: true },
       { title: 'Chat with gf'}
     ];
-    this.images = [
-      { src: "http://bit.ly/3ayPusa", alt: "Image 1", width: 200, isClick: true },
-      { src: "http://bit.ly/3ayPusa", alt: "Image 1", width: 200 },
-      { src: "http://bit.ly/3ayPusa", alt: "Image 1", width: 200 }
+    this.items = [
+      { type: '1', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
+      { type: 'A', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
+      { type: 'a', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: false },
+      { type: 'I', lists: ['Item 1', 'Item 2', 'Item 3'] },
+      { type: 'i', lists: ['Item 1', 'Item 2', 'Item 3'] }
     ];
   };
   render() {
@@ -27,22 +29,10 @@ class App extends Component {
         {
           this.todoItems.length === 0 && 'Nothing here'
         }
-        <table>
-          <tbody>
-            <tr>
-              <th>Image column 1</th>
-              <th>Image column 2</th>
-              <th>Image column 3</th>
-            </tr>
-          </tbody>
-          <tbody> 
-            <tr>     
-              {
-                this.images.map( (image, index) => <Table key={index} image={image} />)
-              }
-            </tr>
-          </tbody>              
-        </table>      
+        <p>Use only HTML to set list type</p>
+        {
+          this.items.map( (item, index) => <OrderList key={index} item={item}/>)
+        }
       </div>
     );
   } 
