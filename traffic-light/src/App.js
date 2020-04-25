@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import TrafficLight from './components/TrafficLight';
+import Input from './components/Input';
 
 const RED = 0;
 const ORANGE = 1;
@@ -39,6 +40,8 @@ class App extends Component {
     return (
       <div className="App">
         <TrafficLight currentColor={currentColor}/>
+        <h2>Binding value</h2>
+        <Input />
       </div>
     );
   } 
