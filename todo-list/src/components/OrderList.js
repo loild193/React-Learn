@@ -6,7 +6,7 @@ class OrderList extends Component {
     return (
       <ol type={item.type}>
         {
-          item.isRendered && item.lists.map( (list, index) => <li>{list}</li>)
+          item.isRendered && item.lists.map( (list, index) => <li key={index}>{list}</li>)
         }
       </ol>
     );   

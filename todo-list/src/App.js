@@ -7,11 +7,13 @@ import OrderList from './components/OrderList';
 class App extends Component {
   constructor() {
     super();
-    this.todoItems = [
-      { title: 'Go to bed', isDone: true },
-      { title: 'Play game', isDone: true },
-      { title: 'Chat with gf'}
-    ];
+    this.state = {
+        todoItems: [
+        { title: 'Go to bed', isDone: true },
+        { title: 'Play game', isDone: true },
+        { title: 'Chat with gf', isDone: false}
+      ]
+    };
     this.items = [
       { type: '1', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
       { type: 'A', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
@@ -19,15 +21,37 @@ class App extends Component {
       { type: 'I', lists: ['Item 1', 'Item 2', 'Item 3'] },
       { type: 'i', lists: ['Item 1', 'Item 2', 'Item 3'] }
     ];
+
+    this.onItemClicked = this.onItemClicked.bind(this);
   };
+
+  onItemClicked(index) {   
+    this.setState((state) => {
+      return state.todoItems.map((item, i) => {
+        if (i === index) {
+          item.isDone = !item.isDone;
+          return item;
+        }
+        else {
+          return item;
+        }
+      });
+    });
+  }
+
   render() {
+    const {todoItems} = this.state;
+    let items = Object.values(todoItems);
+
     return (
       <div className="App">
         {
-          this.todoItems.length > 0 && this.todoItems.map( (item, index) => <TodoItem key={index} item={item}/> )
+          items.length > 0 && items.map( (item, index) => 
+          <TodoItem key={index} item={item} onClick={() => this.onItemClicked(index)}/> 
+          )
         }
         {
-          this.todoItems.length === 0 && 'Nothing here'
+          items.length === 0 && 'Nothing here'
         }
         <p>Use only HTML to set list type</p>
         {
