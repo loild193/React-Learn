@@ -57,10 +57,6 @@ class App extends Component {
         {
           this.items.map( (item, index) => <OrderList key={index} item={item}/>)
         }
-        <h2>Step number</h2>
-        <button onClick={this.onMinusClick}>-</button>
-        <span>{this.state.value}</span>
-        <button onClick={this.onPlusClick}>+</button>
       </div>
     );
   } 

@@ -5,8 +5,8 @@ class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <a href="#">Go back</a>
-        <img src="./logo.png"/>
+        <a href="http://facebook.com">Go back</a>
+        <img src="./logo.png" alt="test"/>
         <button>Sign up</button>
       </div>
     );
