@@ -8,11 +8,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-        todoItems: [
+      todoItems: [
         { title: 'Go to bed', isDone: true },
         { title: 'Play game', isDone: true },
         { title: 'Chat with gf', isDone: false}
-      ]
+      ],
+      msg: {
+        str: '', isAppear: false
+      }
     };
     this.items = [
       { type: '1', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
@@ -23,6 +26,7 @@ class App extends Component {
     ];
 
     this.onItemClicked = this.onItemClicked.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   };
 
   onItemClicked(index) {   
@@ -36,6 +40,19 @@ class App extends Component {
           return item;
         }
       });
+    });
+  }
+
+  handleClick() {
+    this.setState((state) => {
+      state.msg.isAppear = !state.msg.isAppear;
+      console.log(state.msg.isAppear);
+      if(state.msg.isAppear) {
+        state.msg.str = 'You are awesome'       
+      } else {
+        state.msg.str = '';
+      }
+      return state.msg.str;
     });
   }
 
@@ -57,6 +74,8 @@ class App extends Component {
         {
           this.items.map( (item, index) => <OrderList key={index} item={item}/>)
         }
+        <button onClick={this.handleClick}>Click me</button>
+        <p>{this.state.msg.str}</p>
       </div>
     );
   } 
