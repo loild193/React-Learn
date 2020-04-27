@@ -60,10 +60,10 @@ class App extends Component {
         {
           items.length === 0 && 'Nothing here'
         }
-        <p>Use only HTML to set list type</p>
+        {/* <p>Use only HTML to set list type</p>
         {
           this.items.map( (item, index) => <OrderList key={index} item={item}/>)
-        }
+        } */}
       </div>
     );
   } 
