@@ -25,18 +25,22 @@ class App extends Component {
     this.onItemClicked = this.onItemClicked.bind(this);
   };
 
-  onItemClicked(index) {   
-    this.setState((state) => {
-      return state.todoItems.map((item, i) => {
-        if (i === index) {
-          item.isDone = !item.isDone;
-          return item;
-        }
-        else {
-          return item;
-        }
+  onItemClicked(item) {   
+    return (event) => {
+      const isDone = item.isDone;
+      const index = this.state.todoItems.indexOf(item);
+      const {todoItems} = this.state;
+      this.setState({
+        todoItems: [
+          ...todoItems.slice(0, index),
+          {
+            ...item,
+            isDone: !isDone
+          },
+          ...todoItems.slice(index + 1)
+        ]
       });
-    });
+    }
   }
 
   render() {
@@ -47,7 +51,10 @@ class App extends Component {
       <div className="App">
         {
           items.length > 0 && items.map( (item, index) => 
-          <TodoItem key={index} item={item} onClick={() => this.onItemClicked(index)}/> 
+          <TodoItem 
+          key={index} 
+          item={item} 
+          onClick={this.onItemClicked(item)}/> 
           )
         }
         {
