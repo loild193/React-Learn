@@ -7,17 +7,22 @@
   font-size: 23px;
   color: #4d4d4d;
   border-bottom: 1px solid #bebebe;
-  padding: 10px 5px;
+  padding: 20px 10px;
   display: flex;
 }
 
-.TodoItem:last-child {
-  border-bottom: none;
+.TodoItem:hover > #cancel {
+  display: block;
 }
 
 .TodoItem > p {
   margin: 0;
   margin-left: 15px;
+  flex-grow: 1;
+}
+
+.TodoItem #cancel {
+  display: none;
 }
 
 .TodoItem-done > p {

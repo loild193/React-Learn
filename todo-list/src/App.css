@@ -1,7 +1,50 @@
 .App {
-  width: 300px;
-  margin: 0 auto;
+  width: 550px;
+  margin: 40px auto;
   border: 1px solid #EEE;
+  background-color: white;
+  box-shadow: 10px 5px 50px 30px #ebebeb;
+}
+
+.App .Header {
+  padding: 10px 5px;
+  display: flex;
+  border: 1px solid #bebebe;
+}
+
+.App .Header input {
+  font-family: 'Helvetica Neue',
+  'Helvetica',
+  'Arial',
+  sans-serif;
+  font-weight: normal;
+  font-size: 23px;
+  padding-left: 10px;
+  width: 100%;
+  border: none;
+}
+
+.App .Header input::placeholder {
+  opacity: 0.3;
+  font-style: italic;
+}
+
+.App .Header input:focus {
+  outline: none;
+}
+
+.App .Footer {
+  font-family: 'Helvetica Neue',
+  'Helvetica',
+  'Arial',
+  sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  display: flex;
+}
+
+.App .Footer Filter {
+  flex-grow: 1;
 }
 
 .App-logo {

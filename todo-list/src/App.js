@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
-import OrderList from './components/OrderList';
+import Filter from './components/Filter';
+
+import tick from './components/img/tick.svg';
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      newItem: '',
+      left: 0,
+      filter: [
+        { choice: 'All', isChoiced: true },
+        { choice: 'Active', isChoiced: false }, 
+        { choice: 'Completed', isChoiced: false }
+      ],
+      clear: false,
       todoItems: [
         { title: 'Go to bed', isDone: true },
         { title: 'Play game', isDone: true },
         { title: 'Chat with gf', isDone: false}
       ]
     };
-    this.items = [
-      { type: '1', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
-      { type: 'A', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: true },
-      { type: 'a', lists: ['Item 1', 'Item 2', 'Item 3'], isRendered: false },
-      { type: 'I', lists: ['Item 1', 'Item 2', 'Item 3'] },
-      { type: 'i', lists: ['Item 1', 'Item 2', 'Item 3'] }
-    ];
 
-    this.onItemClicked = this.onItemClicked.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.HandleImgClick = this.HandleImgClick.bind(this);
   };
 
   onItemClicked(item) {   
@@ -43,12 +48,84 @@ class App extends Component {
     }
   }
 
+  onKeyUp(event) {
+    if (event.keyCode === 13) {
+      let text = event.target.value;
+
+      if (!text) {
+        return ;
+      }
+
+      text = text.trim();
+      if (!text) { return ; }
+
+      this.setState({
+        newItem: '',
+        todoItems: [
+          { title: text, isDone: false },
+          ...this.state.todoItems
+        ]
+      });
+    } else {
+
+    }
+  }
+
+  onChange(event) {
+    this.setState({
+      newItem: event.target.value
+    });
+  }
+
+  HandleImgClick() {
+    this.setState((state) => {
+      const todoItems = state.todoItems;
+      
+      let trueItems = [];
+      for (let item of todoItems) {
+        let newItem = {...item, isDone: true};
+        trueItems.push(newItem);
+      }
+      let falseItems = [];
+      for (let item of todoItems) {
+        let newItem = {...item, isDone: false};
+        falseItems.push(newItem);
+      }
+
+      for (let item of todoItems) {
+        if (!item.isDone) {
+          return {
+            todoItems: trueItems
+          };
+        }
+      }
+      return {
+        todoItems: falseItems
+      };
+    });
+  }
+
   render() {
-    const {todoItems} = this.state;
+    const {newItem, left, filter, todoItems} = this.state;
     let items = Object.values(todoItems);
 
     return (
       <div className="App">
+        <div className="Header">
+          <img 
+            src={tick} 
+            width="32" 
+            height="30" 
+            onClick={this.HandleImgClick}
+          />
+          <input 
+            type="text" 
+            placeholder="What needs to be done?"
+            value={newItem}
+            onChange={this.onChange}
+            onKeyUp={this.onKeyUp}
+          />
+        </div>
         {
           items.length > 0 && items.map( (item, index) => 
           <TodoItem 
@@ -60,10 +137,11 @@ class App extends Component {
         {
           items.length === 0 && 'Nothing here'
         }
-        {/* <p>Use only HTML to set list type</p>
-        {
-          this.items.map( (item, index) => <OrderList key={index} item={item}/>)
-        } */}
+        <div className="Footer">
+          <p>{left} items left</p>
+          <Filter filter={filter} />
+          <p>Clear completed</p>
+        </div>
       </div>
     );
   } 

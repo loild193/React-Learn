@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import checkImg from '../components/img/check.svg';
 import checkDoneImg from '../components/img/check-done.svg';
+import cancel from '../components/img/cancel.svg';
 
 import './TodoItem.css'
 
 class TodoItem extends Component {
   render() {
     const { item, onClick } = this.props;
-    let url = checkImg;
+    let url = checkDoneImg;
     if (item.isDone) {
-      url = checkDoneImg;
+      url = checkImg;
     }
 
     return (
@@ -19,6 +20,7 @@ class TodoItem extends Component {
       })}>
         <img src={url} width={32} height={28} onClick={onClick}/>
         <p>{item.title}</p>
+        <img id="cancel" src={cancel} width={16} height={28} />
       </div>
     );
   }
