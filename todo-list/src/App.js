@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
-import Filter from './components/Filter';
 
 import tick from './components/img/tick.svg';
 
@@ -11,7 +10,7 @@ class App extends Component {
     super();
     this.state = {
       newItem: '',
-      left: 0,
+      left: 1,
       filter: [
         { choice: 'All', isChoiced: true },
         { choice: 'Active', isChoiced: false }, 
@@ -28,6 +27,7 @@ class App extends Component {
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onChange = this.onChange.bind(this);
     this.HandleImgClick = this.HandleImgClick.bind(this);
+    this.clearCompleted = this.clearCompleted.bind(this);
   };
 
   onItemClicked(item) {   
@@ -35,7 +35,16 @@ class App extends Component {
       const isDone = item.isDone;
       const index = this.state.todoItems.indexOf(item);
       const {todoItems} = this.state;
+      let count = this.state.left;
+
+      if (item.isDone) {
+        count ++; 
+      } else {
+        count --;
+      }
+
       this.setState({
+        left: count,
         todoItems: [
           ...todoItems.slice(0, index),
           {
@@ -51,6 +60,7 @@ class App extends Component {
   onKeyUp(event) {
     if (event.keyCode === 13) {
       let text = event.target.value;
+      let count = this.state.left + 1;
 
       if (!text) {
         return ;
@@ -61,17 +71,17 @@ class App extends Component {
 
       this.setState({
         newItem: '',
+        left: count,
         todoItems: [
           { title: text, isDone: false },
           ...this.state.todoItems
         ]
       });
-    } else {
-
     }
   }
 
   onChange(event) {
+    console.log(this.state.todoItems);
     this.setState({
       newItem: event.target.value
     });
@@ -95,25 +105,96 @@ class App extends Component {
       for (let item of todoItems) {
         if (!item.isDone) {
           return {
+            left: 0,
             todoItems: trueItems
           };
         }
       }
       return {
+        left: todoItems.length,
         todoItems: falseItems
       };
     });
   }
 
+  onSpanClick(fil) {
+    return (event) => {
+      this.setState((state) => {
+        const index = state.filter.indexOf(fil);
+        const {filter} = state;
+        const todoItems = state.todoItems;
+        let newFilter = [];
+        // let choice;
+
+        for (let filt of filter) {
+          if (filter.indexOf(filt) === index) {
+            let newFilt = {...filt, isChoiced:true};
+            // choice = filt.choice;
+            newFilter.push(newFilt);
+          } else {
+            let newFilt = {...filt, isChoiced:false};
+            newFilter.push(newFilt);
+          }
+        }
+
+        let trueItems = [];
+        for (let item of todoItems) {
+          if (item.isDone)
+            trueItems.push(item);
+        }
+
+        let falseItems = [];
+        for (let item of todoItems) {
+          if (!item.isDone)
+            falseItems.push(item);
+        }
+        // if (choice === 'Active') {
+        //   return {
+        //     filter: newFilter,
+        //     todoItems: trueItems
+        //   }
+        // } else if (choice === 'Completed') {
+        //   return {
+        //     filter: newFilter,
+        //     todoItems: falseItems
+        //   }
+        // }
+        return todoItems;
+      });
+    };
+  }
+
+  clearCompleted(){
+    const {todoItems} = this.state;
+    let trueItems = [];
+    
+    for (let item of todoItems) {
+      if (!item.isDone)
+        trueItems.push(item);
+    }
+
+    this.setState({
+      todoItems: trueItems
+    });
+  }
+
   render() {
     const {newItem, left, filter, todoItems} = this.state;
+    let clear = this.state.clear;
     let items = Object.values(todoItems);
 
+    for (const item of items) {
+      if (item.isDone) {
+        clear = true;
+        break;
+      }
+    }
     return (
       <div className="App">
         <div className="Header">
           <img 
-            src={tick} 
+            src={tick}
+            alt="tick" 
             width="32" 
             height="30" 
             onClick={this.HandleImgClick}
@@ -139,8 +220,35 @@ class App extends Component {
         }
         <div className="Footer">
           <p>{left} items left</p>
-          <Filter filter={filter} />
-          <p>Clear completed</p>
+          <div className="Filter">
+            {
+              filter.map( (fil, index) => {
+                if (fil.isChoiced) {
+                  return <span 
+                    key={index}
+                    style={{border: "1px solid #ffa2a2", 
+                    padding: "2px 8px",
+                    borderRadius: "3px"}}
+                    onClick={this.onSpanClick(fil)}>
+                    {fil.choice}
+                  </span>;
+                }
+                return <span 
+                  key={index}
+                  style={{padding: "2px 8px"}} 
+                  onClick={this.onSpanClick(fil)}>
+                  {fil.choice}</span>;
+              })
+            } 
+          </div>
+          {
+            clear === true && 
+            <p style={{visibility: "visible"}} onClick={this.clearCompleted} >Clear completed</p>
+          }
+          {
+            clear === false && 
+            <p style={{visibility: "hidden"}} onClick={this.clearCompleted} >Clear completed</p>
+          }
         </div>
       </div>
     );

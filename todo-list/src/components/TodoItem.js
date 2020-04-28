@@ -18,9 +18,9 @@ class TodoItem extends Component {
       <div className={classNames('TodoItem', {
         'TodoItem-done': item.isDone
       })}>
-        <img src={url} width={32} height={28} onClick={onClick}/>
+        <img src={url} alt="check" width={32} height={28} onClick={onClick}/>
         <p>{item.title}</p>
-        <img id="cancel" src={cancel} width={16} height={28} />
+        <img id="cancel" alt="cancel" src={cancel} width={16} height={28} />
       </div>
     );
   }
