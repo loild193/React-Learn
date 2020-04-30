@@ -1,0 +1,16 @@
+.Perfomance .Content .Cash {
+  display: flex;
+  align-items: center;
+}
+
+.Perfomance .Content .Cash .Avatar {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.Perfomance .Content .Cash .Infor {
+  margin-left: 5px;
+}
