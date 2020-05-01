@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 
 class OrderList extends Component {
   render() {
@@ -11,6 +13,13 @@ class OrderList extends Component {
       </ol>
     );   
   }
+}
+
+OrderList.propTypes = {
+  item: PropTypes.shape({
+    type: PropTypes.string,
+    isRendered: PropTypes.bool
+  })
 }
 
 export default OrderList;

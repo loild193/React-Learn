@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 class Accordion extends Component {
   constructor(props) {
@@ -29,6 +29,11 @@ class Accordion extends Component {
       </div>
     );
   }
+}
+
+Accordion.propTypes = {
+  heading: PropTypes.string,
+  children: PropTypes.string
 }
 
 export default Accordion;

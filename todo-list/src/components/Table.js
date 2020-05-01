@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Table extends Component {
   render() {
@@ -23,6 +24,15 @@ class Table extends Component {
       </td>
     );
   }
+}
+
+Table.propTypes = {
+  image: PropTypes.shape({
+    isClick: PropTypes.bool,
+    src: PropTypes.string,
+    alt: PropTypes.string,
+    width: PropTypes.number
+  })
 }
 
 export default Table;
