@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WeeklySongListItem from './component/WeeklySongListItem';
+import Status from './component/Status';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
         title="Em Không Thể"
         singer="Tiên Tiên, Touliver"
         viewCount={3000} />
+        <Status />
     </div>;
   }
 }
