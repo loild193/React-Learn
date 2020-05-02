@@ -1,5 +1,5 @@
-import React from 'react';
-import WeeklySongListItem from './components/WeeklySongListItem';
+import React, { Component } from 'react';
+import WeeklySongListItem from './component/WeeklySongListItem';
 
 class App extends Component {
   render() {
