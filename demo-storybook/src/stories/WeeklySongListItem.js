@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import WeeklySongListItem from '../src/component/WeeklySongListItem';
+import WeeklySongListItem from '../component/WeeklySongListItem';
 
 storiesOf('WeeklySongListItem', module)
   .add(
