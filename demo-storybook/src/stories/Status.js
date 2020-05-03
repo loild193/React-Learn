@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import Status from '../component/Status';
 import Suggestion from '../component/Suggestion';
+import CreateStatus from '../component/CreateStatus';
+
 
 
 storiesOf('Status', module)
@@ -16,5 +18,11 @@ storiesOf('Status', module)
     'follow-suggestion',
     () => (
       <Suggestion img="" nickName="sr_itsmyfault"/>
+    )
+  )
+  .add(
+    'create-status',
+    () => (
+      <CreateStatus src="" />
     )
   );

@@ -22,6 +22,7 @@
   text-decoration: none;
   display: inline-block;
   height: 25px;
+  line-height: 25px;
   margin: 0 5px;
   padding: 4px 8px;
   color: black;
@@ -32,6 +33,7 @@
 .Status .status-look {
   display: flex;
   height: 38px;
+  line-height: 38px;
   justify-content: space-around;
   align-items: center;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import WeeklySongListItem from './component/WeeklySongListItem';
 import Status from './component/Status';
 import Suggestion from './component/Suggestion';
+import CreateStatus from './component/CreateStatus';
 
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         <Suggestion 
         img="" 
         nickName="sr_itsmyfault" />
+        <CreateStatus src=""/>
     </div>;
   }
 }

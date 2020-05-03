@@ -1,0 +1,56 @@
+.CreateStatus {
+  width: 500px;
+  height: 200px;
+  margin: 10px;
+  border: 1px solid #DDD;
+  border-radius: 3px;
+}
+
+.CreateStatus .status-header {
+  border-bottom: 1px solid #EEE;
+  background-color: #EEE;
+  padding: 10px 5px;
+}
+
+.CreateStatus .status-header p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.CreateStatus .status-content { 
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px solid #DDD;
+}
+
+.CreateStatus .status-content > a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: violet;
+}
+
+.CreateStatus .status-content textarea {
+  border: none;
+  height: 100px;
+  width: 100%;
+  margin-left: 4px;
+  font-size: 15px;
+  padding-top: 9px;
+}
+
+.CreateStatus .status-footer {
+  padding: 0px 8px;
+}
+
+.CreateStatus .status-footer > a {
+  text-decoration: none;
+  color: rgb(41, 41, 41);
+  height: 40px;
+  line-height: 40px;
+  margin-right: 20px;
+  background-color: #DDD;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
