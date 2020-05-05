@@ -1,0 +1,141 @@
+import React, { Component } from 'react';
+
+import { Container, Row, Col, Card, CardImg, CardBody,
+  CardTitle, CardSubtitle, Button
+} from 'reactstrap';
+
+class Products extends Component {
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      products: [{
+        "id": "ae738473-b434-4fcf-8102-3716ba7ff469",
+        "name": "Pasta - Bauletti, Chicken White",
+        "description": "pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed",
+        "imageUrl": "http://dummyimage.com/300x200.png/dddddd/000000"
+      }, {
+        "id": "fb1c03be-31fc-4c6e-bd0e-d6c13308ebb1",
+        "name": "Tomatoes Tear Drop Yellow",
+        "description": "ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "9a2499d1-cd19-4ec5-afa1-7e4ccb1d48b7",
+        "name": "Soup - Campbells - Tomato",
+        "description": "vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "7e0fd28e-b204-443a-8dbb-115aa783a864",
+        "name": "Chives - Fresh",
+        "description": "tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet",
+        "imageUrl": "http://dummyimage.com/300x200.png/ff4444/ffffff"
+      }, {
+        "id": "96410ef1-a9c9-4d8a-88e3-9438166b07c0",
+        "name": "Potatoes - Mini White 3 Oz",
+        "description": "montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean",
+        "imageUrl": "http://dummyimage.com/300x200.png/dddddd/000000"
+      }, {
+        "id": "9cd41fc3-da28-4a3e-a77f-d85048c23534",
+        "name": "Skewers - Bamboo",
+        "description": "felis donec semper sapien a libero nam dui proin leo",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "7136c11e-2751-49d4-93f0-bb0ba979f3c7",
+        "name": "Beans - Wax",
+        "description": "eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est",
+        "imageUrl": "http://dummyimage.com/300x200.png/5fa2dd/ffffff"
+      }, {
+        "id": "9ea06df9-cec5-4de3-9fdf-e0c8df1f0f47",
+        "name": "Tart Shells - Savory, 3",
+        "description": "sed accumsan felis ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "a176d70c-e258-4d3e-885f-88b505c7f452",
+        "name": "Macaroons - Two Bite Choc",
+        "description": "amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac",
+        "imageUrl": "http://dummyimage.com/300x200.png/ff4444/ffffff"
+      }, {
+        "id": "315273f1-5a2b-4007-a249-a0f23cd6eae2",
+        "name": "Dried Cranberries",
+        "description": "nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit",
+        "imageUrl": "http://dummyimage.com/300x200.png/5fa2dd/ffffff"
+      }, {
+        "id": "af212064-7caf-4236-b8ee-5320c17f25ca",
+        "name": "Cinnamon - Stick",
+        "description": "est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis",
+        "imageUrl": "http://dummyimage.com/300x200.png/5fa2dd/ffffff"
+      }, {
+        "id": "d5aafe63-ad40-4dbc-bee2-169bf6c3a083",
+        "name": "Mushroom - Trumpet, Dry",
+        "description": "magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "92847103-2471-4efb-a0b2-aeac4caff4a1",
+        "name": "Carrots - Mini Red Organic",
+        "description": "tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec",
+        "imageUrl": "http://dummyimage.com/300x200.png/ff4444/ffffff"
+      }, {
+        "id": "0d57aca5-2b3b-4a49-af2d-da3e4083e74a",
+        "name": "Spaghetti Squash",
+        "description": "volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "cbe99fda-75cc-4974-931e-2a3bc7ea0fc9",
+        "name": "Wine - Zinfandel California 2002",
+        "description": "iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }, {
+        "id": "21ba048a-8beb-4cef-b8d5-3d6f243e87d6",
+        "name": "Foam Espresso Cup Plain White",
+        "description": "ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla",
+        "imageUrl": "http://dummyimage.com/300x200.png/ff4444/ffffff"
+      }, {
+        "id": "328205df-64b1-42ef-b509-5bc1fd1bb202",
+        "name": "Table Cloth 144x90 White",
+        "description": "rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non",
+        "imageUrl": "http://dummyimage.com/300x200.png/dddddd/000000"
+      }, {
+        "id": "5be91b9e-c6a9-4b1e-9dfe-a1ae923ebdbd",
+        "name": "Lamb - Whole, Fresh",
+        "description": "ut nunc vestibulum ante ipsum primis in faucibus orci luctus et",
+        "imageUrl": "http://dummyimage.com/300x200.png/ff4444/ffffff"
+      }, {
+        "id": "d54b6a46-7220-4c8d-84ee-137b21611a7c",
+        "name": "Lid Coffee Cup 8oz Blk",
+        "description": "justo eu massa donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi",
+        "imageUrl": "http://dummyimage.com/300x200.png/dddddd/000000"
+      }, {
+        "id": "bc852a73-e2a3-4d9f-a850-6b434ae5a9b9",
+        "name": "Sauce - White, Mix",
+        "description": "viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam",
+        "imageUrl": "http://dummyimage.com/300x200.png/cc0000/ffffff"
+      }]
+    };
+  }
+
+  render() {
+    const { products } = this.state;
+    return (
+      <Container>
+        <Row> 
+          {
+            products.map( (product) => 
+            <Col sm="6" md="3">
+              <Card>
+                <CardImg top width="100%" src={product.imageUrl}/>
+                <CardBody>
+                  <CardTitle>{product.name}</CardTitle>
+                  <CardSubtitle>{product.description}</CardSubtitle>
+                  <Button>Add to cart</Button>
+                </CardBody>
+              </Card>
+            </Col>
+            )
+          }
+        </Row> 
+      </Container>
+    );  
+  }; 
+}
+
+export default Products;
