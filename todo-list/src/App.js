@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import {
+  Switch,
+  Route,
+  Link,
+  BrowserRouter as Router
+} from "react-router-dom";
+
 import './App.css';
-import TodoItem from './components/TodoItem';
-
-import tick from './components/img/tick.svg';
-
+import Completed from './components/Completed';
+import Active from './components/Active';
+import All from './components/All';
 
 class App extends Component {
   constructor() {
@@ -24,162 +30,161 @@ class App extends Component {
       ]
     };
 
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.HandleImgClick = this.HandleImgClick.bind(this);
-    this.clearCompleted = this.clearCompleted.bind(this);
+    // this.onKeyUp = this.onKeyUp.bind(this);
+    // this.onChange = this.onChange.bind(this);
+    // this.HandleImgClick = this.HandleImgClick.bind(this);
+    // this.clearCompleted = this.clearCompleted.bind(this);
   };
 
-  onItemClicked(item) {   
-    return (event) => {
-      const isDone = item.isDone;
-      const index = this.state.todoItems.indexOf(item);
-      const {todoItems} = this.state;
-      let count = this.state.left;
+  // onItemClicked(item) {   
+  //   return (event) => {
+  //     const isDone = item.isDone;
+  //     const index = this.state.todoItems.indexOf(item);
+  //     const {todoItems} = this.state;
+  //     let count = this.state.left;
 
-      if (item.isDone) {
-        count ++; 
-      } else {
-        count --;
-      }
+  //     if (item.isDone) {
+  //       count ++; 
+  //     } else {
+  //       count --;
+  //     }
 
-      this.setState({
-        left: count,
-        todoItems: [
-          ...todoItems.slice(0, index),
-          {
-            ...item,
-            isDone: !isDone
-          },
-          ...todoItems.slice(index + 1)
-        ]
-      });
-    }
-  }
+  //     this.setState({
+  //       left: count,
+  //       todoItems: [
+  //         ...todoItems.slice(0, index),
+  //         {
+  //           ...item,
+  //           isDone: !isDone
+  //         },
+  //         ...todoItems.slice(index + 1)
+  //       ]
+  //     });
+  //   }
+  // }
 
-  onKeyUp(event) {
-    if (event.keyCode === 13) {
-      let text = event.target.value;
-      let count = this.state.left + 1;
+  // onKeyUp(event) {
+  //   if (event.keyCode === 13) {
+  //     let text = event.target.value;
 
-      if (!text) {
-        return ;
-      }
+  //     if (!text) {
+  //       return ;
+  //     }
 
-      text = text.trim();
-      if (!text) { return ; }
+  //     text = text.trim();
+  //     if (!text) { return ; }
 
-      this.setState({
-        newItem: '',
-        left: count,
-        todoItems: [
-          { title: text, isDone: false },
-          ...this.state.todoItems
-        ]
-      });
-    }
-  }
+  //     this.setState({
+  //       newItem: '',
+  //       left: this.state.left + 1,
+  //       todoItems: [
+  //         { title: text, isDone: false },
+  //         ...this.state.todoItems
+  //       ]
+  //     });
+  //   }
+  // }
 
-  onChange(event) {
-    console.log(this.state.todoItems);
-    this.setState({
-      newItem: event.target.value
-    });
-  }
+  // onChange(event) {
+  //   console.log(this.state.todoItems);
+  //   this.setState({
+  //     newItem: event.target.value
+  //   });
+  // }
 
-  HandleImgClick() {
-    this.setState((state) => {
-      const todoItems = state.todoItems;
+  // HandleImgClick() {
+  //   this.setState((state) => {
+  //     const todoItems = state.todoItems;
       
-      let trueItems = [];
-      for (let item of todoItems) {
-        let newItem = {...item, isDone: true};
-        trueItems.push(newItem);
-      }
-      let falseItems = [];
-      for (let item of todoItems) {
-        let newItem = {...item, isDone: false};
-        falseItems.push(newItem);
-      }
+  //     let trueItems = [];
+  //     for (let item of todoItems) {
+  //       let newItem = {...item, isDone: true};
+  //       trueItems.push(newItem);
+  //     }
+  //     let falseItems = [];
+  //     for (let item of todoItems) {
+  //       let newItem = {...item, isDone: false};
+  //       falseItems.push(newItem);
+  //     }
 
-      for (let item of todoItems) {
-        if (!item.isDone) {
-          return {
-            left: 0,
-            todoItems: trueItems
-          };
-        }
-      }
-      return {
-        left: todoItems.length,
-        todoItems: falseItems
-      };
-    });
-  }
+  //     for (let item of todoItems) {
+  //       if (!item.isDone) {
+  //         return {
+  //           left: 0,
+  //           todoItems: trueItems
+  //         };
+  //       }
+  //     }
+  //     return {
+  //       left: todoItems.length,
+  //       todoItems: falseItems
+  //     };
+  //   });
+  // }
 
-  onSpanClick(fil) {
-    return (event) => {
-      this.setState((state) => {
-        const index = state.filter.indexOf(fil);
-        const {filter} = state;
-        const todoItems = state.todoItems;
-        let newFilter = [];
-        // let choice;
+  // onSpanClick(fil) {
+  //   return (event) => {
+  //     this.setState((state) => {
+  //       const index = state.filter.indexOf(fil);
+  //       const {filter} = state;
+  //       const todoItems = state.todoItems;
+  //       let newFilter = [];
+  //       // let choice;
 
-        for (let filt of filter) {
-          if (filter.indexOf(filt) === index) {
-            let newFilt = {...filt, isChoiced:true};
-            // choice = filt.choice;
-            newFilter.push(newFilt);
-          } else {
-            let newFilt = {...filt, isChoiced:false};
-            newFilter.push(newFilt);
-          }
-        }
+  //       for (let filt of filter) {
+  //         if (filter.indexOf(filt) === index) {
+  //           let newFilt = {...filt, isChoiced:true};
+  //           // choice = filt.choice;
+  //           newFilter.push(newFilt);
+  //         } else {
+  //           let newFilt = {...filt, isChoiced:false};
+  //           newFilter.push(newFilt);
+  //         }
+  //       }
 
-        let trueItems = [];
-        for (let item of todoItems) {
-          if (item.isDone)
-            trueItems.push(item);
-        }
+  //       let trueItems = [];
+  //       for (let item of todoItems) {
+  //         if (item.isDone)
+  //           trueItems.push(item);
+  //       }
 
-        let falseItems = [];
-        for (let item of todoItems) {
-          if (!item.isDone)
-            falseItems.push(item);
-        }
-        // if (choice === 'Active') {
-        //   return {
-        //     filter: newFilter,
-        //     todoItems: trueItems
-        //   }
-        // } else if (choice === 'Completed') {
-        //   return {
-        //     filter: newFilter,
-        //     todoItems: falseItems
-        //   }
-        // }
-        return todoItems;
-      });
-    };
-  }
+  //       let falseItems = [];
+  //       for (let item of todoItems) {
+  //         if (!item.isDone)
+  //           falseItems.push(item);
+  //       }
+  //       // if (choice === 'Active') {
+  //       //   return {
+  //       //     filter: newFilter,
+  //       //     todoItems: trueItems
+  //       //   }
+  //       // } else if (choice === 'Completed') {
+  //       //   return {
+  //       //     filter: newFilter,
+  //       //     todoItems: falseItems
+  //       //   }
+  //       // }
+  //       return todoItems;
+  //     });
+  //   };
+  // }
 
-  clearCompleted(){
-    const {todoItems} = this.state;
-    let trueItems = [];
+  // clearCompleted(){
+  //   const {todoItems} = this.state;
+  //   let trueItems = [];
     
-    for (let item of todoItems) {
-      if (!item.isDone)
-        trueItems.push(item);
-    }
+  //   for (let item of todoItems) {
+  //     if (!item.isDone)
+  //       trueItems.push(item);
+  //   }
 
-    this.setState({
-      todoItems: trueItems
-    });
-  }
+  //   this.setState({
+  //     todoItems: trueItems
+  //   });
+  // }
 
   render() {
-    const {newItem, left, filter, todoItems} = this.state;
+    const { left, filter, todoItems} = this.state;
     let clear = this.state.clear;
     let items = Object.values(todoItems);
 
@@ -191,7 +196,8 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <div className="Header">
+        <Router>
+        {/* <div className="Header">
           <img 
             src={tick}
             alt="tick" 
@@ -224,20 +230,22 @@ class App extends Component {
             {
               filter.map( (fil, index) => {
                 if (fil.isChoiced) {
-                  return <span 
+                  return <Link
+                    to={`/${fil.choice.toLowerCase()}`}
                     key={index}
                     style={{border: "1px solid #ffa2a2", 
                     padding: "2px 8px",
                     borderRadius: "3px"}}
                     onClick={this.onSpanClick(fil)}>
                     {fil.choice}
-                  </span>;
+                  </Link>;
                 }
-                return <span 
+                return <Link
+                  to={`/${fil.choice.toLowerCase()}`}
                   key={index}
                   style={{padding: "2px 8px"}} 
                   onClick={this.onSpanClick(fil)}>
-                  {fil.choice}</span>;
+                  {fil.choice}</Link>;
               })
             } 
           </div>
@@ -249,7 +257,25 @@ class App extends Component {
             clear === false && 
             <p style={{visibility: "hidden"}} onClick={this.clearCompleted} >Clear completed</p>
           }
-        </div>
+        </div> */}
+          <Switch>
+            <Route path="/completed">
+              <Completed 
+                filter="Completed" 
+                completedItems={items.filter((item) => item.isDone === true)} 
+                left={left}
+                clear={clear}
+                items={items}
+                filter={filter}
+                />
+            </Route>
+            <Route path="/active">
+              <Active filter="Active" item={items.filter((item) => item.isDone === false)} />
+            </Route>
+            <Route path="/" component={All}>
+            </Route>
+          </Switch>
+        </Router>
       </div>
     );
   } 
