@@ -9,6 +9,8 @@ import {
 } from 'reactstrap';
 import { Link } from "react-router-dom";
 
+import { CartContext } from '../contexts/Cart';
+
 const TopMenu = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,15 +19,20 @@ const TopMenu = (props) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <NavbarBrand href="/">Cart</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
+            <NavItem className="mr-3">
               <Link to="/">Home</Link>
             </NavItem>
-            <NavItem>
+            <NavItem className="mr-3">
               <Link to="/products/">Products</Link>
+            </NavItem>
+            <NavItem className="mr-3">
+              <CartContext.Consumer>
+                {( {cartItems} ) => (<Link to="/products/">Cart ({cartItems.length})</Link>)}
+              </CartContext.Consumer>
             </NavItem>
           </Nav>
         </Collapse>
