@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Collapse,
   Navbar,
@@ -11,10 +11,17 @@ import { Link } from "react-router-dom";
 
 import { CartContext } from '../contexts/Cart';
 
+
 const TopMenu = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const cartItems = useContext(CartContext); 
+
+  useEffect(() => {
+    localStorage.setItem("key", JSON.stringify(cartItems))
+  });
 
   return (
     <div>

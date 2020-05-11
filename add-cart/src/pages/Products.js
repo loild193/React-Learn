@@ -27,6 +27,7 @@ class Products extends Component {
 
   render() {
     const { products } = this.state;
+    
     return (
       <Container>
         <Row> 
@@ -39,9 +40,9 @@ class Products extends Component {
                   <CardTitle>{product.name}</CardTitle>
                   <CardSubtitle>{product.description}</CardSubtitle>
                   <CartContext.Consumer>
-                    {({ addToCart }) => (
+                    {({ addToCart }) => 
                       <Button onClick={() => addToCart(product)}>Add to cart</Button>
-                    )} 
+                    }
                   </CartContext.Consumer>
                 </CardBody>
               </Card>
