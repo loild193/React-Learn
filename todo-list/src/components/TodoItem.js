@@ -10,7 +10,7 @@ import './TodoItem.css'
 
 class TodoItem extends Component {
   render() {
-    const { item, onClick } = this.props;
+    const { item, onClick, onClearItem } = this.props;
     let url = checkDoneImg;
     if (item.isDone) {
       url = checkImg;
@@ -22,7 +22,7 @@ class TodoItem extends Component {
       })}>
         <img src={url} alt="check" width={32} height={28} onClick={onClick}/>
         <p>{item.title}</p>
-        <img id="cancel" alt="cancel" src={cancel} width={16} height={28} />
+        <img id="cancel" alt="cancel" src={cancel} width={16} height={28} onClick={onClearItem}/>
       </div>
     );
   }

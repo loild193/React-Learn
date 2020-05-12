@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Active from './Active';
 import TodoItem from './TodoItem';
+import All from './All';
 
 import cancel from '../components/img/cancel.svg';
 import tick from './img/tick.svg';
@@ -17,6 +18,10 @@ import './TodoItem.css'
 import '../App.css'
 
 class Completed extends Component {
+  constructor(props) {
+    super(props);
+  }
+  
   onItemClicked(item) {   
     return (event) => {
       const isDone = item.isDone;
@@ -43,31 +48,30 @@ class Completed extends Component {
   }
 
   HandleImgClick() {
-    let {completedItems} = this.props;
+    // let { items } = this.props;
       
-    let trueItems = [];
-    for (let item of completedItems) {
-      let newItem = {...item, isDone: true};
-      trueItems.push(newItem);
-    }
-    let falseItems = [];
-    for (let item of completedItems) {
-      let newItem = {...item, isDone: false};
-      falseItems.push(newItem);
-    }
+    // let trueItems = [];
+    // for (let item of items) {
+    //   let newItem = {...item, isDone: true};
+    //   trueItems.push(newItem);
+    // }
+    // let falseItems = [];
+    // for (let item of items) {
+    //   let newItem = {...item, isDone: false};
+    //   falseItems.push(newItem);
+    // }
 
-    for (let item of completedItems) {
-      if (!item.isDone) {
-        return {
-          left: 0,
-          completedItems: trueItems
-        };
-      }
-    }
-    return {
-      left: completedItems.length,
-      completedItems: falseItems
-    };
+    // for (let item of items) {
+    //   if (!item.isDone) {
+    //     return {
+    //       left: 0,
+    //       completedItems: trueItems
+    //     };
+    //   }
+    // }
+
+    // left = completedItems.length;
+    // completedItems = falseItems
   }
 
   clearCompleted(){
@@ -103,20 +107,7 @@ class Completed extends Component {
     }
 
     return (
-        <div className="App" style={{margin: "0 auto"}}>
-          <div className="Header">
-            <img 
-              src={tick}
-              alt="tick" 
-              width="32" 
-              height="30" 
-              onClick={this.HandleImgClick}
-            />
-            <input 
-              type="text" 
-              placeholder="What needs to be done?"
-            />
-          </div>
+        <div className="Completed" style={{margin: "0 auto"}}>
           {
             completedItems.length > 0 && completedItems.map( (item, index) => 
             <TodoItem 
@@ -125,46 +116,11 @@ class Completed extends Component {
             onClick={this.onItemClicked(item)}/> 
             )
           }
-          {
-            completedItems.length === 0 && 'Nothing here'
-          }
-          <div className="Footer">
-            <p>{left} items left</p>
-            <div className="Filter">
-              {
-                filter.map( (fil, index) => {
-                  if (fil.isChoiced) {
-                    return <Link
-                      to={`/${fil.choice}`}
-                      key={index}
-                      style={{border: "1px solid #ffa2a2", 
-                      padding: "2px 8px",
-                      borderRadius: "3px"}}>
-                      {fil.choice}</Link>;
-                  }
-                  return <Link
-                    to={`/${fil.choice}`}
-                    key={index}
-                    style={{padding: "2px 8px"}}>
-                    {fil.choice}</Link>;
-                })
-              } 
-            </div>
-            {
-              clear === true && 
-              <p style={{visibility: "visible"}} onClick={this.clearCompleted} >Clear completed</p>
-            }
-            {
-              clear === false && 
-              <p style={{visibility: "hidden"}} onClick={this.clearCompleted} >Clear completed</p>
-            }
-          </div>
           <Switch>
             <Route path="/Active">
               <Active filter="Active" item={items.filter((item) => item.isDone === false)} />
             </Route>
-            {/* <Route path="/">
-
+            {/* <Route path="/" component={All}>
             </Route> */}
           </Switch>
         </div>
