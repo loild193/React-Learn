@@ -17,11 +17,11 @@ const TopMenu = (props) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
-  const cartItems = useContext(CartContext); 
+  // const cartItems = useContext(CartContext); 
 
-  useEffect(() => {
-    localStorage.setItem("key", JSON.stringify(cartItems))
-  });
+  // useEffect(() => {
+  //   localStorage.setItem("key", JSON.stringify(cartItems))
+  // });
 
   return (
     <div>
@@ -38,7 +38,7 @@ const TopMenu = (props) => {
             </NavItem>
             <NavItem className="mr-3">
               <CartContext.Consumer>
-                {( {cartItems} ) => (<Link to="/products/">Cart ({cartItems.length})</Link>)}
+                {({ cartItems }) => (<Link to="/products/">Cart ({cartItems.length})</Link>)}
               </CartContext.Consumer>
             </NavItem>
           </Nav>

@@ -7,7 +7,7 @@ export class CartProvider extends Component {
     super(props);
 
     this.state = {
-      cartItems: []
+      cartItems: JSON.parse(localStorage.getItem("key")) == null ? [] : JSON.parse(localStorage.getItem("key")).cartItems
     }
 
     this.addToCart = this.addToCart.bind(this);

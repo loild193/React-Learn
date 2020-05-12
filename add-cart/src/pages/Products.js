@@ -25,6 +25,12 @@ class Products extends Component {
       })
   }
 
+  componentDidUpdate() {
+    const cartItems = this.context; 
+    
+    localStorage.setItem("key", JSON.stringify(cartItems))
+  }
+
   render() {
     const { products } = this.state;
     
@@ -33,7 +39,7 @@ class Products extends Component {
         <Row> 
           {
             products.map( (product) => 
-            <Col sm="6" md="3">
+            <Col sm="6" md="3" key={product.id}>
               <Card>
                 <CardImg top width="100%" src={product.imageUrl}/>
                 <CardBody>
@@ -54,5 +60,7 @@ class Products extends Component {
     );  
   }; 
 }
+
+Products.contextType = CartContext;
 
 export default Products;
