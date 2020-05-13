@@ -117,7 +117,6 @@ class App extends Component {
   }
 
   onChange(event) {
-    console.log(this.state.todoItems);
     this.setState({
       newItem: event.target.value
     });
