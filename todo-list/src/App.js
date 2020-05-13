@@ -269,7 +269,7 @@ class App extends Component {
                 onItemClicked={this.onItemClicked}
               />
             </Route>
-            <Route path="/" component={All}>
+            <Route path="/">
               <All 
                 clear={clear}
                 todoItems={items}
