@@ -19,18 +19,14 @@ class App extends Component {
     super();
     this.state = {
       newItem: '',
-      left: 1,
+      left: 0,
       filter: [
         { choice: 'All', isChoiced: true },
         { choice: 'Active', isChoiced: false }, 
         { choice: 'Completed', isChoiced: false }
       ],
       clear: false,
-      todoItems: [
-        { title: 'Go to bed', isDone: true },
-        { title: 'Play game', isDone: true },
-        { title: 'Chat with gf', isDone: false}
-      ]
+      todoItems: localStorage.getItem("todoItems") == null ? [] : JSON.parse(localStorage.getItem("todoItems"))
     }
 
     this.onItemClicked = this.onItemClicked.bind(this);
@@ -53,6 +49,16 @@ class App extends Component {
       } else {
         count --;
       }
+
+      localStorage.setItem("todoItems", JSON.stringify([
+        ...todoItems.slice(0, index),
+        {
+          ...item,
+          isDone: !isDone
+        },
+        ...todoItems.slice(index + 1)
+        ]
+      ));
 
       this.setState({
         left: count,
@@ -78,6 +84,12 @@ class App extends Component {
 
       text = text.trim();
       if (!text) { return ; }
+
+      localStorage.setItem("todoItems", JSON.stringify([
+        { title: text, isDone: false },
+        ...this.state.todoItems
+        ]
+      ));
 
       this.setState({
         newItem: '',
@@ -114,12 +126,14 @@ class App extends Component {
 
       for (let item of todoItems) {
         if (!item.isDone) {
+          localStorage.setItem("todoItems", JSON.stringify(trueItems));
           return {
             left: 0,
             todoItems: trueItems
           };
         }
       }
+      localStorage.setItem("todoItems", JSON.stringify(falseItems));
       return {
         left: todoItems.length,
         todoItems: falseItems
@@ -179,7 +193,7 @@ class App extends Component {
       if (!item.isDone)
         trueItems.push(item);
     }
-
+    localStorage.setItem("todoItems", JSON.stringify(trueItems));
     this.setState({
       todoItems: trueItems
     });
@@ -194,6 +208,12 @@ class App extends Component {
       if (!item.isDone) {
         count --;
       }
+
+      localStorage.setItem("todoItems", JSON.stringify([
+        ...todoItems.slice(0, index),
+        ...todoItems.slice(index + 1)
+        ]
+      ));
 
       this.setState({
         left: count,

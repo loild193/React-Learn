@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 
 import '../App.css';
 import TodoItem from './TodoItem';
-import Active from './Active';
-import Completed from './Completed';
-
-import tick from './img/tick.svg';
 
 
 class All extends Component {
-  constructor(props) {
-    super(props);
-  };
 
   render() {
     const { todoItems } = this.props;
