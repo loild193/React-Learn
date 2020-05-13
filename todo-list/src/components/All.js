@@ -8,14 +8,7 @@ class All extends Component {
 
   render() {
     const { todoItems } = this.props;
-    let clear = this.props.clear;
-
-    for (const item of todoItems) {
-      if (item.isDone) {
-        clear = true;
-        break;
-      }
-    }
+    
     return (
       <div className="All">
         {

@@ -37,6 +37,20 @@ class App extends Component {
     this.onClearItem = this.onClearItem.bind(this);
   }
 
+  componentDidMount() {
+    const { todoItems } = this.state;
+    let count = 0;
+
+    for (const item of todoItems) {
+      if (!item.isDone)
+        count ++;
+    }
+
+    this.setState({
+      left: count
+    });
+  }
+
   onItemClicked(item) {   
     return (event) => {
       const isDone = item.isDone;
@@ -146,14 +160,11 @@ class App extends Component {
       this.setState((state) => {
         const index = state.filter.indexOf(fil);
         const {filter} = state;
-        const todoItems = state.todoItems;
         let newFilter = [];
-        let choice;
 
         for (let filt of filter) {
           if (filter.indexOf(filt) === index) {
             let newFilt = {...filt, isChoiced:true};
-            choice = filt.choice;
             newFilter.push(newFilt);
           } else {
             let newFilt = {...filt, isChoiced:false};
@@ -161,25 +172,8 @@ class App extends Component {
           }
         }
 
-        let trueItems = [];
-        for (let item of todoItems) {
-          if (item.isDone)
-            trueItems.push(item);
-        }
-
-        let falseItems = [];
-        for (let item of todoItems) {
-          if (!item.isDone)
-            falseItems.push(item);
-        }
-        if (choice === 'Active') {
-          return {
-            filter: newFilter
-          }
-        } else if (choice === 'Completed') {
-          return {
-            filter: newFilter
-          }
+        return {
+          filter: newFilter
         }
       });
     };
@@ -260,24 +254,26 @@ class App extends Component {
           <Switch>
             <Route path="/completed">
               <Completed 
-                filter="Completed" 
                 completedItems={items.filter((item) => item.isDone === true)} 
-                left={left}
                 clear={clear}
                 items={items}
-                filter={filter}
+                onClearItem={this.onClearItem}
+                onItemClicked={this.onItemClicked}
               />
             </Route>
             <Route path="/active">
-              <Active filter="Active" item={items.filter((item) => item.isDone === false)} />
+              <Active  
+                activeItems={items.filter((item) => item.isDone === false)} 
+                clear={clear}
+                items={items}
+                onClearItem={this.onClearItem}
+                onItemClicked={this.onItemClicked}
+              />
             </Route>
             <Route path="/" component={All}>
               <All 
-                filter="All" 
-                left={left}
                 clear={clear}
                 todoItems={items}
-                filter={filter}
                 onItemClicked={this.onItemClicked}
                 onSpanClick={this.onSpanClick}
                 clearCompleted={this.clearCompleted}
@@ -287,7 +283,12 @@ class App extends Component {
           </Switch>
       
         <div className="Footer">
-          <p>{left} items left</p>
+          {
+            (left === 0 || left === 1) && <p>{left} item left</p>
+          }
+          {
+            (left !== 0 && left !== 1) && <p>{left} items left</p>
+          } 
           <div className="Filter">
             {
               filter.map( (fil, index) => {
@@ -309,7 +310,8 @@ class App extends Component {
                   style={{padding: "2px 8px",
                   color: "rgb(33, 33, 33)"}} 
                   onClick={this.onSpanClick(fil)}>
-                  {fil.choice}</Link>;
+                  {fil.choice}
+                  </Link>;
               })
             } 
           </div>
